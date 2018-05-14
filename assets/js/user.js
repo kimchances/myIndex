@@ -16,13 +16,15 @@
                     "serverCode": "getIndexUser"
                 },//数据，这里使用的是Json格式进行传输,
                 dataType: 'json',
-                done: function (result) {//返回数据根据结果进行相应的处理
+                success: function (result) {//返回数据根据结果进行相应的处理
                     console.info(result);
                     if (result) {
                         let dataSource = result.data;
                         $("#myName").text(dataSource[0].uName);
                         $("#myText").text(dataSource[0].uContent);
-                        $("#myText").attr('src', dataSource[0].uHeadImg);
+                        $("#myPic").attr('src', dataSource[0].uHeadImg);
+                        $("#pTitle").text(dataSource[0].pTitle);
+                        $("#pContent").text(dataSource[0].pContent);
                     }
                 }
             });
@@ -33,7 +35,7 @@
                     "serverCode": "getIndexCategory"
                 },//数据，这里使用的是Json格式进行传输,
                 dataType: 'json',
-                done: function (result) {//返回数据根据结果进行相应的处理
+                success: function (result) {//返回数据根据结果进行相应的处理
                     console.info(result);
                     if (result) {
                         let dataSource = result.data;
@@ -71,7 +73,7 @@
                     "serverCode": "getIndexProjects"
                 },//数据，这里使用的是Json格式进行传输,
                 dataType: 'json',
-                done: function (result) {//返回数据根据结果进行相应的处理
+                success: function (result) {//返回数据根据结果进行相应的处理
                     console.info(result);
                     if (result) {
                         let dataSource = result.data;

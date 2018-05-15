@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!--[if lte IE 8]>
     <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/loading.css"/>
     <link rel="stylesheet" href="assets/css/main.css"/>
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="assets/css/ie8.css"/><![endif]-->
@@ -35,10 +36,20 @@
 <!--[if lte IE 8]>
 <script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script>
-    $(document).ready(function (){
-    // <a href="./b.html?a=1&a=2&username=zhangsan&password=123&=">跳转</a>
-    //     var a = UrlParam.paramValues("a");
+    $(document).ready(function () {
+        // <a href="./b.html?a=1&a=2&username=zhangsan&password=123&=">跳转</a>
+        //     var a = UrlParam.paramValues("a");
+        $.ajax({
+            url: "loading.html",
+            type: "GET",
+            dataType: "text",
+            async: false,
+            success: function (data) {
+                $('body').append(data)
+            }
+        });
     });
+
 </script>
 </body>
 </html>

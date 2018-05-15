@@ -18,12 +18,12 @@
 <body>
 
 <!-- Nav -->
-<nav id="nav">
+<nav class="main_content" id="nav">
     <ul class="container">
         <li><a href="javascript:void(0)" onclick="history.back();">#Back</a></li>
     </ul>
 </nav>
-<div id="mdArea" style="margin-top:75px;padding: 0 .5em;">
+<div class="main_content" id="mdArea" style="margin-top:75px;padding: 0 .5em;">
 
 </div>
 
@@ -45,9 +45,15 @@
             dataType: "text",
             async: false,
             success: function (data) {
-                $('body').append(data)
+                $('body').append(data);
             }
         });
+        /*到时候跑数据,完全回来搞定了以后就显示.main_content的内容,隐藏.wrap的内容*/
+        setTimeout(function (){
+            $(".wrap").hide();
+            $(".main_content").show();
+            $("body").css('background','#FFF'); //覆盖样式,背景mash直接用的是ColorBlack
+        },3000)
     });
 
 </script>

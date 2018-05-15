@@ -298,6 +298,10 @@ body {
     color: #eaf7ff;
 }
 
+.main_content{
+    display: none;
+}
+
 .wrap {
     position: absolute;
     top: 50%;

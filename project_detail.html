@@ -36,25 +36,58 @@
 <!--[if lte IE 8]>
 <script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script>
+    var projectId;
     $(document).ready(function () {
-        // <a href="./b.html?a=1&a=2&username=zhangsan&password=123&=">跳转</a>
-        //     var a = UrlParam.paramValues("a");
-        $.ajax({
-            url: "loading.html",
-            type: "GET",
-            dataType: "text",
-            async: false,
-            success: function (data) {
-                $('body').append(data);
+        projectId = getQueryString("projectId");
+        /*查看ID正常不正常*/
+        console.info(projectId);
+
+        new Promise(function (resolve, reject) {
+            $.ajax({
+                url: "loading.html",
+                type: "GET",
+                dataType: "text",
+                success: function (data) {
+                    $('body').append(data);
+                    resolve();
+                }
+            });
+        }).then(function () {
+            if (!projectId) {
+                $(".title").html('**无数据**');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "../myServer/serveraction.do",
+                    data: {
+                        "serverCode": "getProjectDetail",
+                        "projectId": projectId
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        console.info(result);
+                        if (result) {
+                            let dataSource = result.data;
+                            if(dataSource.length){
+                                $("#mdArea").html(dataSource[0].myAreaContent);
+                                $(".wrap").hide();
+                                $(".main_content").show();
+                                $("body").css('background', '#FFF'); //覆盖样式,背景mash直接用的是ColorBlack
+                            }
+                        }
+                    }
+                });
             }
         });
-        /*到时候跑数据,完全回来搞定了以后就显示.main_content的内容,隐藏.wrap的内容*/
-        setTimeout(function (){
-            $(".wrap").hide();
-            $(".main_content").show();
-            $("body").css('background','#FFF'); //覆盖样式,背景mash直接用的是ColorBlack
-        },3000)
+
     });
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
 
 </script>
 </body>

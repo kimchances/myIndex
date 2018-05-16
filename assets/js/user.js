@@ -108,8 +108,18 @@
             * 跑数据,项目列表
             * */
             new Promise(function (resolve, reject) {
+                let specUrl='';
+                /*
+                * 防止直接访问域名的相对路劲获取错误
+                * */
+                if(window.location.href.split('/e').length>1){
+                    specUrl="loading.html";
+                }else{
+                    specUrl="e/loading.html"
+                }
+
                 $.ajax({
-                    url: "loading.html",
+                    url: specUrl,
                     type: "GET",
                     dataType: "text",
                     success: function (data) {

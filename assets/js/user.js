@@ -109,7 +109,7 @@
             * */
             new Promise(function (resolve, reject) {
                 $.ajax({
-                    url: "../loading.html",
+                    url: "loading.html",
                     type: "GET",
                     dataType: "text",
                     success: function (data) {

@@ -77,21 +77,20 @@
                 if (result) {
                     let dataSource = result.data;
                     let dataSourceL = dataSource.length;
-                    let htmlStr = ``;
+                    let htmlStr = `<div class="container"><div class="row">`;
                     for (let i = 0; i < dataSourceL; i++) {
                         if (dataSource[i].jump == "1") {
-                            htmlStr += `<div class="container" onclick="window.location.href='project_detail.html?projectId=${dataSource[i].pId}'">`;
+                            htmlStr += `<div class="4u 12u(mobile)" onclick="window.location.href='project_detail.html?projectId=${dataSource[i].pId}'">`;
                         } else {
-                            htmlStr += `<div class="container">`;
+                            htmlStr += `<div class="4u 12u(mobile)">`;
                         }
-                        htmlStr += `<div class="row">
-                            <div class="4u 12u(mobile)">
+                        htmlStr += `
                             <article class="box style2">
                             <a href="javascript:void(0);" class="image featured"><img src="${dataSource[i].pUrl}"/></a>
                             <h3><a href="javascript:void(0);">${dataSource[i].pName}</a></h3>
-                            <p>${dataSource[i].pContent}</p></article></div></div></div>`;
+                            <p>${dataSource[i].pContent}</p></article></div>`;
                     }
-                    htmlStr += `<p>------------你触摸到了我的底线------------</p>`;
+                    htmlStr += `</div></div><p>------------你触摸到了我的底线------------</p>`;
                     $("#related").append(htmlStr);
                     resolve();
                 }
@@ -113,9 +112,9 @@
                 * 防止直接访问域名的相对路劲获取错误
                 * */
                 if(window.location.href.split('/e').length>1){
-                    specUrl="loading.html";
+                    specUrl="loading.txt";
                 }else{
-                    specUrl="e/loading.html"
+                    specUrl="e/loading.txt"
                 }
 
                 $.ajax({

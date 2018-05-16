@@ -45,8 +45,17 @@
         console.info(projectId);
 
         new Promise(function (resolve, reject) {
+            let specUrl='';
+            /*
+            * 防止直接访问域名的相对路劲获取错误
+            * */
+            if(window.location.href.split('/e').length>1){
+                specUrl="loading.txt";
+            }else{
+                specUrl="e/loading.txt"
+            }
             $.ajax({
-                url: "loading.html",
+                url: specUrl,
                 type: "GET",
                 dataType: "text",
                 success: function (data) {

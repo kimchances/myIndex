@@ -9,7 +9,7 @@
             },//数据，这里使用的是Json格式进行传输,
             dataType: 'json',
             success: function (result) {//返回数据根据结果进行相应的处理
-                console.info(JSON.stringify(result));
+                console.info(result);
                 if (result) {
                     let dataSource = result.data;
                     if(dataSource.length) {
@@ -33,10 +33,9 @@
             },//数据，这里使用的是Json格式进行传输,
             dataType: 'json',
             success: function (result) {//返回数据根据结果进行相应的处理
-                console.info(JSON.stringify(result));
+                console.info(result);
                 if (result) {
                     let dataSource = result.data;
-                    console.info(result);
                     let dataSourceL = dataSource.length;
                     let htmlStr = ``;
                     let categoryTitle = ``;
@@ -74,7 +73,7 @@
             },//数据，这里使用的是Json格式进行传输,
             dataType: 'json',
             success: function (result) {//返回数据根据结果进行相应的处理
-                console.info(JSON.stringify(result));
+                console.info(result);
                 if (result) {
                     let dataSource = result.data;
                     let dataSourceL = dataSource.length;
@@ -110,7 +109,7 @@
             * */
             new Promise(function (resolve, reject) {
                 $.ajax({
-                    url: "loading.html",
+                    url: "../loading.html",
                     type: "GET",
                     dataType: "text",
                     success: function (data) {

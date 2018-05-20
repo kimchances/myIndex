@@ -90,7 +90,7 @@
                             <h3><a href="javascript:void(0);">${dataSource[i].pName}</a></h3>
                             <p>${dataSource[i].pContent}</p></article></div>`;
                     }
-                    htmlStr += `</div></div><p>------------* 有爱的底线 *------------</p>`;
+                    htmlStr += `</div></div>`;
                     $("#related").append(htmlStr);
                     resolve();
                 }

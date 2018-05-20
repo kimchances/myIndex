@@ -80,7 +80,7 @@
                     let htmlStr = `<div class="container"><div class="row">`;
                     for (let i = 0; i < dataSourceL; i++) {
                         if (dataSource[i].jump == "1") {
-                            htmlStr += `<div class="4u 12u(mobile)" onclick="window.location.href='project_detail.html?projectId=${dataSource[i].pId}'">`;
+                            htmlStr += `<div class="4u 12u(mobile)" onclick="window.open('project_detail.html?projectId=${dataSource[i].pId}')">`;
                         } else {
                             htmlStr += `<div class="4u 12u(mobile)">`;
                         }

@@ -18,6 +18,8 @@
                         $("#myPic").attr('src', dataSource[0].uHeadImg);
                         $("#pTitle").text(dataSource[0].pTitle);
                         $("#pContent").text(dataSource[0].pContent);
+                        $("title").html(dataSource[0].wTitle);
+                        $("#nav").html(dataSource[0].wNav);
                     }
                     resolve();
                 }

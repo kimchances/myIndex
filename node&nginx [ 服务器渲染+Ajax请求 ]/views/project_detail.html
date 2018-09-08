@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>#KimChan</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="../../public/css/loading.css"/>
+    <link rel="stylesheet" href="../../public/css/main.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../../public/css/ie8.css"/><![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="../../public/css/ie9.css"/><![endif]-->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../public/css/images/favicon.ico">
+</head>
+<body class="container">
+
+<!-- Nav -->
+<nav class="main_content" id="nav">
+    <ul class="container">
+        <li><a href="javascript:void(0)">#KimChan</a></li>
+    </ul>
+</nav>
+<div class="main_content" id="mdArea" style="margin-top:75px;padding: 0 .5em;">
+
+</div>
+<!--<div class="main_content wrapper style3" style="height: 4em;padding: 1em 0 1em 0;font-size: .8em;font-weight:  bold;">
+    <p>粤ICP备18056308号</p>
+</div>-->
+<!-- Scripts -->
+<script src="../../public/js/jquery.min.js"></script>
+<script src="../../public/js/jquery.scrolly.min.js"></script>
+<script src="../../public/js/skel.min.js"></script>
+<script src="../../public/js/skel-viewport.min.js"></script>
+<script src="../../public/js/util.js"></script>
+<!--[if lte IE 8]>
+<script src="../../public/js/ie/respond.min.js"></script><![endif]-->
+<script>
+    var projectId;
+    $(document).ready(function () {
+        projectId = getQueryString("projectId");
+        /*查看ID正常不正常*/
+
+
+        new Promise(function (resolve, reject) {
+            let specUrl = '';
+            /*
+            * 防止直接访问域名的相对路劲获取错误
+            * */
+            $.ajax({
+                url: "loading.txt",
+                type: "GET",
+                dataType: "text",
+                success: function (data) {
+                    $('body').append(data);
+                    resolve();
+                }
+            });
+        }).then(function () {
+            if (!projectId) {
+                $(".title").html('**无数据**');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "getProjectDetail",
+                    data: {
+                        "projectId": projectId
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        // console.info(result);
+                        if (result) {
+                            if (result.length) {
+                                $("#mdArea").html(result[0].myAreaContent);
+                                $(".wrap").hide();
+                                $(".main_content").show();
+                                $("body").css('background', '#FFF'); //覆盖样式,背景mash直接用的是ColorBlack
+                            } else {
+                                $(".title").html('**无数据**');
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+</script>
+</body>
+</html>

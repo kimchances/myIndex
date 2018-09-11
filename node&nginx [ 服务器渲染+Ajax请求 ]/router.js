@@ -4,7 +4,24 @@ var mysqlSucker = require('./models/mysql-connector')
 var router = express.Router()
 
 router.get('/', function (req, res) {
-    res.render('index.html')
+    res.render('index.html');
+    //查询有没有本身的记录
+    let sqlStatement = `SELECT GuestIpAddress FROM Idx_Guest_Logs WHERE GuestIpAddress='${req.ip}'`;
+    mysqlSucker.query(sqlStatement, [], (results, fields) => {
+        if (results.length) {
+            //更新记录时间
+            let sqlStatement = `UPDATE Idx_Guest_Logs SET GuestTime = NOW() WHERE GuestIpAddress='${req.ip}'`;
+            mysqlSucker.query(sqlStatement, [], (results, fields) => {
+                console.info(`更新了访问时间`)
+            });
+        } else {
+            //写入记录信息
+            let sqlStatement = `INSERT INTO Idx_Guest_Logs (GuestIpAddress,GuestName,GuestTime) VALUES ('${req.ip}','${req.hostname}',NOW())`;
+            mysqlSucker.query(sqlStatement, [], (results, fields) => {
+                console.info(`写入了访问记录`)
+            });
+        }
+    });
 })
 
 router.get('/loading.txt', function (req, res) {

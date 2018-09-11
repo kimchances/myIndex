@@ -1,45 +1,27 @@
 var express = require('express')
 var mysqlSucker = require('./models/mysql-connector')
-var os = require('os');
-var ifaces = os.networkInterfaces();
 var router = express.Router()
+var requestIp = require('request-ip');
 
 router.get('/', function (req, res) {
     res.render('index.html');
-    Object.keys(ifaces).forEach(function (ifname) {
-        var alias = 0;
-        ifaces[ifname].forEach(function (iface) {
-            if ('IPv4' !== iface.family || iface.internal !== false) {
-                // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-                return;
-            }
-
-            if (alias >= 1) {
-                // this single interface has multiple ipv4 addresses
-                console.log(ifname + ':' + alias, iface.address);
-            } else {
-                // this interface has only one ipv4 adress
-                //查询有没有本身的记录
-                    let sqlStatement = `SELECT GuestIpAddress FROM Idx_Guest_Logs WHERE GuestIpAddress='${iface.address}'`;
-                    mysqlSucker.query(sqlStatement, [], (results, fields) => {
-                        if (results.length) {
-                            //更新记录时间
-                            let sqlStatement = `UPDATE Idx_Guest_Logs SET GuestTime = NOW() WHERE GuestIpAddress='${iface.address}'`;
-                            mysqlSucker.query(sqlStatement, [], (results, fields) => {
-                                console.info(`更新了访问时间`)
-                            });
-                        } else {
-                            //写入记录信息
-                            let sqlStatement = `INSERT INTO Idx_Guest_Logs (GuestIpAddress,GuestName,GuestTime) VALUES ('${iface.address}','${ifname}',NOW())`;
-                            mysqlSucker.query(sqlStatement, [], (results, fields) => {
-                                console.info(`写入了访问记录`)
-                            });
-                        }
-                    });
-                console.log(ifname, iface.address);
-            }
-            ++alias;
-        });
+    //查询有没有本身的记录
+    var IP = requestIp.getClientIp(req)
+    let sqlStatement = `SELECT GuestIpAddress FROM Idx_Guest_Logs WHERE GuestIpAddress='${IP}'`;
+    mysqlSucker.query(sqlStatement, [], (results, fields) => {
+        if (results.length) {
+            //更新记录时间
+            let sqlStatement = `UPDATE Idx_Guest_Logs SET GuestTime = NOW() WHERE GuestIpAddress='${IP}'`;
+            mysqlSucker.query(sqlStatement, [], (results, fields) => {
+                console.info(`更新了访问时间`)
+            });
+        } else {
+            //写入记录信息
+            let sqlStatement = `INSERT INTO Idx_Guest_Logs (GuestIpAddress,GuestName,GuestTime) VALUES ('${IP}','${req.headers['user-agent']}',NOW())`;
+            mysqlSucker.query(sqlStatement, [], (results, fields) => {
+                console.info(`写入了访问记录`)
+            });
+        }
     });
 })
 

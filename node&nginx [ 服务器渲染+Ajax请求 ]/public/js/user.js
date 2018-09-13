@@ -73,13 +73,13 @@
                     let htmlStr = `<div class="container"><div class="row">`;
                     for (let i = 0; i < dataSourceL; i++) {
                         if (result[i].jump == "1") {
-                            htmlStr += `<div class="4u 12u(mobile)" onclick="window.open('project_detail.html?projectId=${result[i].pId}')">`;
+                            htmlStr += `<div class="4u 12u(mobile)" onclick="window.open('${result[i].pUrl}?projectId=${result[i].pId}')">`;
                         } else {
                             htmlStr += `<div class="4u 12u(mobile)">`;
                         }
                         htmlStr += `
                             <article class="box style2">
-                            <a href="javascript:void(0);" class="image featured"><img src="${result[i].pUrl}"/></a>
+                            <a href="javascript:void(0);" class="image featured"><img src="${result[i].pPics}"/></a>
                             <h3><a href="javascript:void(0);">${result[i].pName}</a></h3>
                             <p>${result[i].pContent}</p></article></div>`;
                     }

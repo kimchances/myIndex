@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title><%=info[0].wTitle %></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--[if lte IE 8]><script src="../public/js/ie/html5shiv.js"></script><![endif]-->
+  <!-- <link rel="stylesheet" href="../public/css/loading.css"/> -->
+  <link rel="stylesheet" href="../public/css/main.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="../public/css/ie8.css" /><![endif]-->
+  <!--[if lte IE 9]><link rel="stylesheet" href="../public/css/ie9.css" /><![endif]-->
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../public/css/images/favicon.ico">
+</head>
+
+<body>
+
+  <!-- Nav -->
+  <nav class="main_content" id="nav">
+    <%-info[0].wNav %>
+  </nav>
+
+  <!-- Home -->
+  <div class="main_content wrapper style1 first">
+    <article class="container" id="top">
+      <div class="row">
+        <div class="4u 12u(mobile)">
+          <span class="image fit"><img src="<%=info[0].uHeadImg %>" alt="" id="myPic" /></span>
+        </div>
+        <div class="8u 12u(mobile)">
+          <header>
+            <h1>Hi. I'm <strong id="myName"><%=info[0].uName %></strong>.</h1>
+          </header>
+          <p id="myText"><%-info[0].uContent %></p>
+          <a href="#about" class="button big scrolly">Show Me?</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- 关于 -->
+  <div class="main_content wrapper style2">
+    <article id="about">
+      <header>
+        <h2 id="myCategoryTitle"></h2>
+      </header>
+      <div class="container">
+        <div class="row" id="myCategory">
+          <% for(var i in category){ %>
+          <% if (category[i].jump == "1") { %>
+            <div class="4u 12u(mobile)" onclick="window.open('<%=category[i].cUrl %>')">
+              <% } else { %>
+              <div class="4u 12u(mobile)">
+              <% } %>
+                <section class="box style1">
+                  <span class="icon featured <%=category[i].cFont %>"></span>
+                  <h3><%=category[i].cName %></h3>
+                  <p><%=category[i].cContent %></p>
+                </section>
+              </div>
+          <% } %>
+          </div>
+        </div>
+        <footer>
+          <a href="#related" class="button big scrolly">看看项目啊</a>
+        </footer>
+    </article>
+  </div>
+
+  <!-- 相关 -->
+  <div class="main_content wrapper style3">
+    <article id="related">
+      <header>
+        <h2 id="pTitle"><%=info[0].pTitle %></h2>
+        <p id="pContent"><%=info[0].pContent %></p>
+      </header>
+      <div class="container">
+        <div class="row">
+          <% for(var i in projects){ %>
+          <% if (projects[i].jump == "1") { %>
+          <div class="4u 12u(mobile)" onclick="window.open('<%=projects[i].pUrl %>?projectsId=<%=projects[i].pId %>')">
+          </div>
+          <% } else { %>
+          <div class="4u 12u(mobile)">
+            <% } %>
+            <article class="box style2">
+              <a href="javascript:void(0);" class="image featured"><img src="<%=projects[i].pPics %>" /></a>
+              <h3><a href="javascript:void(0);"><%=projects[i].pName %></a></h3>
+              <p><%=projects[i].pContent %></p>
+            </article>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  {{include '../_partials/footer.html'}}
+  <!-- Scripts -->
+  <script src="../public/js/jquery.min.js"></script>
+  <script src="../public/js/jquery.scrolly.min.js"></script>
+  <script src="../public/js/skel.min.js"></script>
+  <script src="../public/js/skel-viewport.min.js"></script>
+  <script src="../public/js/util.js"></script>
+  <!--[if lte IE 8]><script src="../public/js/ie/respond.min.js"></script><![endif]-->
+  <script src="../public/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 # kimchanwill.com
-1. 第一版: 普通网站Ajax请求Java服务器+Tomcat
-2. 第二版: 普通网站Ajax请求Node服务器+Nginx
-3. 第三版: Node+SSR+Nginx
-4. 第四版: egg.js+Nuxt.js
+
+1. v1: 普通网站 Ajax 请求 Java 服务器+Tomcat
+2. v2: 普通网站 Ajax 请求 Node 服务器+Nginx
+3. v3: Node+网页模板 ajax+Nginx
+4. v4: egg.js+Nuxt.js

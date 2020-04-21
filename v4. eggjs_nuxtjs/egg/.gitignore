@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+run
+dist
+*.egg
+*.egg-info
+build
+logs/
+logs/offical
+config/config.default.js

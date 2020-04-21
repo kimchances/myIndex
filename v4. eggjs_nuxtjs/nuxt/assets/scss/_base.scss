@@ -1,0 +1,64 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+// 优化滚动栏
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 1px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.2);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", Arial, sans-serif;
+  position: relative;
+  z-index: -1;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  /* 修复不必要的空隙的bug */
+  display: block;
+}
+
+i {
+  font-size: 14px;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+button {
+  outline: none;
+  border: none;
+  background: transparent;
+}
+input {
+  // 重设iphone的border-raudis
+  border-radius: 0px;
+  border: none;
+  outline: none;
+}
